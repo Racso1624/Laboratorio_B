@@ -306,8 +306,32 @@ class AFN(object):
         return transition_state_1, transition_state_2
     
 
-    def simulation():
+    def simulation(self, expression):
         pass
+    
+    # Se utiliza el algoritmo del libro para calcular e-closure
+    def e_closure(self, states):
+        # Se inicia el stack con los estados de T
+        states_stack = list(states)
+        # Se inicia el resultado con el estado T
+        states_result = list(states)
+
+        # Se itera mientra el stack no se encuentre vacio
+        while(len(states_stack) != 0):
+            # Se saca el estado t
+            state = states_stack.pop()
+            # Se revisa en cada transicion
+            for i in self.transitions:
+                # Se revisa que tenga transicion con ε 
+                if(i[0] == state and i[1] == "ε"):
+                    # Si el estado no esta en los resultados se ingresa
+                    if(i[2] not in states_result):
+                        states_result.append(i[2])
+                        states_stack.append(i[2])
+        
+        # Se retorna el resultado
+        return states_result
+
 
     # Funcion realizada para ordenar las transiciones de manera que se puedan visualizar
     # con un orden de 1 a N estados
