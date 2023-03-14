@@ -421,4 +421,4 @@ class AFN(object):
             graph.edge(str(transition[0]), str(transition[2]), label=transition[1])
 
         # Se renderiza
-        graph.render("./images/PreLab_5", format="png", view=True)
+        graph.render("./images/AFN", format="png", view=True)
