@@ -306,6 +306,9 @@ class AFN(object):
         return transition_state_1, transition_state_2
     
 
+    def simulation():
+        pass
+
     # Funcion realizada para ordenar las transiciones de manera que se puedan visualizar
     # con un orden de 1 a N estados
     def orderTransitions(self):
@@ -323,12 +326,15 @@ class AFN(object):
             transition[0] = self.states[len(self.states) - transition_2]
             transition[2] = self.states[len(self.states) - transition_1]
 
+    # Funcion para graficar el automata
     def graphAF(self):
         
+        # Se realiza el titulo del automata
         description = ("AFN de la Expresión " + self.regex)
         graph = Digraph()
         graph.attr(rankdir="LR", labelloc="t", label=description)
 
+        # Por cada estado se crea la imagen para graficarlo
         for state in self.states:
 
             if(state in self.initial_state):
@@ -338,9 +344,12 @@ class AFN(object):
             else:
                 graph.node(str(state), str(state), shape="circle")
 
+        # Se coloca el inicio del automata
         graph.edge("INICIO", str(self.initial_state[0]))
 
+        # Se crean las transiciones de los estados
         for transition in self.transitions:
             graph.edge(str(transition[0]), str(transition[2]), label=transition[1])
 
+        # Se renderiza
         graph.render("./images/PreLab_5", format="png", view=True)
