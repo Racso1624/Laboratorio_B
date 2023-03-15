@@ -3,9 +3,9 @@ from graphviz import Digraph
 
 class AFD(object):
 
-    def __init__(self, regex):
-        self.regex = regex
-        self.postfix_expression = Regex(regex).postfix_expression
+    def __init__(self):
+        self.regex = None
+        self.postfix_expression = Regex(self.regex).postfix_expression
         print(self.postfix_expression)
         self.characters_stack = list(self.postfix_expression)
         self.states_counter = 0
@@ -14,7 +14,6 @@ class AFD(object):
         self.initial_state = []
         self.final_state = []
         self.symbols = []
-        self.graphAF()
     
     # Funcion para graficar el automata
     def graphAF(self):

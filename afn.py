@@ -330,7 +330,21 @@ class AFN(object):
         else:
             return "Cadena No Aceptada"
         
+    def subsetConstruction(self):
 
+        states = []
+        transitions = []
+        
+
+        Dstates = [self.e_closure(self.initial_state)]
+        state_counter = 0
+
+        while(len(Dstates) != state_counter):
+            for symbol in self.symbols:
+                new_state = self.e_closure(self.move(Dstates[state_counter], symbol))
+                if new_state not in Dstates:
+                    Dstates.append(new_state)
+                
     
     # Se utiliza el algoritmo del libro para calcular e-closure
     def e_closure(self, states):
