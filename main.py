@@ -4,7 +4,7 @@
 from afn import *
 
 #text = "(a(a?b*|c+)b|baa)"
-text = "(a|b)*abb"
+text = "(a|b)*|ab"
 
 afn = AFN(text)
 print(afn.transitions)

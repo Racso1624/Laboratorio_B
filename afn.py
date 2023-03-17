@@ -73,7 +73,6 @@ class AFN(object):
         # Se obtienen los dos caracteres para realizar la operacion
         character_1 = self.characters_stack.pop()
         character_2 = self.characters_stack.pop()
-        print(character_1, character_2)
 
         # Si el primer caracter es otra operacion
         if(character_1 in ".|*+?"):
@@ -365,9 +364,6 @@ class AFN(object):
             # Se hacen dos sets para lograr hacer operaciones de conjuntos entre ellos
             set_states = set(Dstates[state_counter])
             set_final_states = set(self.final_state)
-            print(states[state_counter])
-            print(set_states)
-            print(set_final_states)
 
             # Se verifica que los estados encontrados se encuentren en el conjunto de estados finales
             if(set_states.intersection(set_final_states).__len__() != 0):
@@ -421,13 +417,11 @@ class AFN(object):
             state = states_stack.pop()
             # Se revisa en cada transicion
             for i in self.transitions:
-                # Se revisa que tenga transicion con ε 
+                # Se revisa que tenga transicion con el caracter
                 if(i[0] == state and i[1] == character):
                     # Si el estado no esta en los resultados se ingresa
                     if(i[2] not in states_result):
                         states_result.append(i[2])
-                        states_stack.append(i[2])
-        
         # Se retorna el resultado
         return states_result
 
