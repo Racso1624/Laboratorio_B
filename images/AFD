@@ -1,8 +1,18 @@
 digraph {
-	label="AFD de la Expresión a|b" labelloc=t rankdir=LR
+	label="AFD de la Expresión (a|b)*abb" labelloc=t rankdir=LR
 	S0 [label=S0 shape=circle style=filled]
 	S1 [label=S1 shape=circle]
-	S2 [label=S2 shape=doublecircle style=filled]
-	S0 -> S1 [label=a]
-	S0 -> S2 [label=b]
+	S2 [label=S2 shape=circle]
+	S3 [label=S3 shape=circle]
+	S4 [label=S4 shape=doublecircle style=filled]
+	S0 -> S1 [label=b]
+	S0 -> S2 [label=a]
+	S1 -> S1 [label=b]
+	S1 -> S2 [label=a]
+	S2 -> S3 [label=b]
+	S2 -> S2 [label=a]
+	S3 -> S4 [label=b]
+	S3 -> S2 [label=a]
+	S4 -> S1 [label=b]
+	S4 -> S2 [label=a]
 }
