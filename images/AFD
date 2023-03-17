@@ -5,8 +5,4 @@ digraph {
 	S2 [label=S2 shape=doublecircle style=filled]
 	S0 -> S1 [label=a]
 	S0 -> S2 [label=b]
-	S1 -> S1 [label=a]
-	S1 -> S1 [label=b]
-	S2 -> S2 [label=a]
-	S2 -> S2 [label=b]
 }

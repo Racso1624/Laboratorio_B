@@ -345,12 +345,13 @@ class AFN(object):
             for symbol in self.symbols:
                 new_state = self.e_closure(self.move(Dstates[state_counter], symbol))
                 print(new_state)
-                if (new_state not in Dstates) and len(new_state) != 0:
-                    Dstates.append(new_state)
-                    transitions.append([states[state_counter], symbol, "S" + str(len(states))])
-                    states.append("S" + str(len(states)))
-                else:
-                    transitions.append([states[state_counter], symbol, states[state_counter]])
+                if(len(new_state) != 0):
+                    if (new_state not in Dstates):
+                        Dstates.append(new_state)
+                        transitions.append([states[state_counter], symbol, "S" + str(len(states))])
+                        states.append("S" + str(len(states)))
+                    else:
+                        transitions.append([states[state_counter], symbol, states[state_counter]])
             state_counter += 1
         afd = AFD()
         afd.regex = self.regex
