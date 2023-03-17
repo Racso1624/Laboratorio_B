@@ -3,7 +3,7 @@ digraph {
 	S0 [label=S0 shape=circle style=filled]
 	S1 [label=S1 shape=circle]
 	S2 [label=S2 shape=circle]
-	S3 [label=S3 shape=circle]
+	S3 [label=S3 shape=doublecircle style=filled]
 	S4 [label=S4 shape=doublecircle style=filled]
 	S0 -> S1 [label=b]
 	S0 -> S2 [label=a]

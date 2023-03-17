@@ -331,32 +331,57 @@ class AFN(object):
             return "Cadena Aceptada"
         else:
             return "Cadena No Aceptada"
-        
+    
+    # Se realiza SubSet Construction con el Algoritmo brindado
     def subsetConstruction(self):
-
+        # Se inicializa con el Estado 0 y sin transiciones
         states = ["S0"]
         transitions = []
+        final_states = []
 
+        # Se inicializa Dstate con el e-closure
         Dstates = [self.e_closure(self.initial_state)]
-        print(Dstates)
+        # Se tiene un state counter para marcar Dstates
         state_counter = 0
 
+        # Mientras no haya ninguno marcado se continua
         while(state_counter != len(Dstates)):
+            # Se itera por cada simbolo
             for symbol in self.symbols:
+                # Se consigue el nuevo estado
                 new_state = self.e_closure(self.move(Dstates[state_counter], symbol))
+                # Se verifica que no sea un "estado muerto"
                 if(len(new_state) != 0):
+                    # Se ingresa el estado si no se encuentra en Dstates
                     if (new_state not in Dstates):
                         Dstates.append(new_state)
                         states.append("S" + str(len(states)))
+                    
+                    # Se busca el estado de transicion
                     new_state_counter = Dstates.index(new_state)
+                    # Se realiza la transicion
                     transitions.append([states[state_counter], symbol, states[new_state_counter]])
+
+            # Se hacen dos sets para lograr hacer operaciones de conjuntos entre ellos
+            set_states = set(Dstates[state_counter])
+            set_final_states = set(self.final_state)
+            print(states[state_counter])
+            print(set_states)
+            print(set_final_states)
+
+            # Se verifica que los estados encontrados se encuentren en el conjunto de estados finales
+            if(set_states.intersection(set_final_states).__len__() != 0):
+                final_states.append(states[state_counter])
+            
             state_counter += 1
+
+        # Se crea el AFD
         afd = AFD()
         afd.regex = self.regex
         afd.states = states
         afd.transitions = transitions
         afd.initial_state = states[0]
-        afd.final_state = states[len(states) - 1]
+        afd.final_state = final_states
         afd.graphAF()
         
     
