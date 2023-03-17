@@ -4,10 +4,10 @@ from graphviz import Digraph
 class AFD(object):
 
     def __init__(self):
-        self.regex = None
-        self.postfix_expression = Regex(self.regex).postfix_expression
-        print(self.postfix_expression)
-        self.characters_stack = list(self.postfix_expression)
+        # self.regex = None
+        # self.postfix_expression = Regex(self.regex).postfix_expression
+        # print(self.postfix_expression)
+        # self.characters_stack = list(self.postfix_expression)
         self.states_counter = 0
         self.states = []
         self.transitions = []
@@ -32,9 +32,6 @@ class AFD(object):
                 graph.node(str(state), str(state), shape="doublecircle", style="filled")
             else:
                 graph.node(str(state), str(state), shape="circle")
-
-        # Se coloca el inicio del automata
-        graph.edge("INICIO", str(self.initial_state[0]))
 
         # Se crean las transiciones de los estados
         for transition in self.transitions:

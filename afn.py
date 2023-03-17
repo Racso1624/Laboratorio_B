@@ -1,5 +1,6 @@
 from regex import *
 from graphviz import Digraph
+from afd import *
 
 class AFN(object):
 
@@ -17,6 +18,7 @@ class AFN(object):
         self.thompsonConstruction()
         self.orderTransitions()
         self.graphAF()
+        self.subsetConstruction()
 
 
     def thompsonConstruction(self):
@@ -332,19 +334,32 @@ class AFN(object):
         
     def subsetConstruction(self):
 
-        states = []
+        states = ["S0"]
         transitions = []
-        
 
         Dstates = [self.e_closure(self.initial_state)]
+        print(Dstates)
         state_counter = 0
 
-        while(len(Dstates) != state_counter):
+        while(state_counter != len(Dstates)):
             for symbol in self.symbols:
                 new_state = self.e_closure(self.move(Dstates[state_counter], symbol))
-                if new_state not in Dstates:
+                print(new_state)
+                if (new_state not in Dstates) and len(new_state) != 0:
                     Dstates.append(new_state)
-                
+                    transitions.append([states[state_counter], symbol, "S" + str(len(states))])
+                    states.append("S" + str(len(states)))
+                else:
+                    transitions.append([states[state_counter], symbol, states[state_counter]])
+            state_counter += 1
+        afd = AFD()
+        afd.regex = self.regex
+        afd.states = states
+        afd.transitions = transitions
+        afd.initial_state = states[0]
+        afd.final_state = states[len(states) - 1]
+        afd.graphAF()
+        
     
     # Se utiliza el algoritmo del libro para calcular e-closure
     def e_closure(self, states):

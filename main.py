@@ -3,7 +3,8 @@
 
 from afn import *
 
-text = "(a(a?b*|c+)b|baa)"
+#text = "(a(a?b*|c+)b|baa)"
+text = "a|b"
 
 afn = AFN(text)
 print(afn.transitions)
