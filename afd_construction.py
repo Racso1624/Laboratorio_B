@@ -1,3 +1,4 @@
+from afd import *
 from syntaxtree import *
 
 # Se toma el algortimo para nullable
@@ -69,17 +70,53 @@ def followpos(node):
     if(node.character == "."):
         # Se toma el lastpos y se itera
         pos_i = lastpos(node.left_child)
-        # Para cada 
+        # Para cada posicion que regresa lastpos
         for i in pos_i:
+            # Se agrega la union del followpos con el firstpos del nodo derecho
             i.followpos = i.followpos.union(firstpos(node.right_child))
+    # Para los caracteres de cerradura se realiza lo siguiente
     elif(node.character in "*+"):
+        # Se toma lastpos y se itera
         pos_i = lastpos(node.left_child)
+        # Para cada posicion que regresa lastpos
         for i in pos_i:
+            # Se agrega la union del followpos con el firstpos del nodo derecho
             i.followpos = i.followpos.union(firstpos(node.left_child))
-    
+
+def computeProperties(nodes):
+    for node in nodes:
+        node.nullable = nullable(node)
+        node.firstpos = firstpos(node)
+        node.lastpos = lastpos(node)
+        followpos(node)
+
 def afd_construction(regex):
     tree = SyntaxTree(regex)
-    for i in tree.node_list:
-        followpos(i)
-    for i in tree.node_list:
-        print(i.followpos)
+
+    tree_root = tree.tree_root
+    node_list = tree.node_list
+
+    states = ["S0"]
+    transitions = []
+    final_states = []
+    symbols = []
+
+    computeProperties(node_list)
+
+    Dstates = [firstpos(tree_root)]
+    state_counter = 0
+    # Mientras no haya ninguno marcado se continua
+    while(state_counter != len(Dstates)):
+        # Se itera por cada simbolo
+        for symbol in symbols:
+            pass
+        state_counter += 1
+
+
+    # Se crea el AFD
+    afd = AFD()
+    afd.states = states
+    afd.transitions = transitions
+    afd.initial_state = states[0]
+    afd.final_state = final_states
+    afd.graphAF()
