@@ -21,18 +21,17 @@ class SyntaxTree():
 
         # Se itera en cada caracter de la expresion
         for character in self.postfix:
-            
             # Si es unario solo se crea el hijo a la izquierda
             if(character in "+*?"):
                 new_node = Node(character)
-                new_node.left_child(node_stack.pop())
+                new_node.left_child = node_stack.pop()
                 node_stack.append(new_node)
                 self.node_list.append(new_node)
             # Si es binario se crean los hijos de izquierda y derecha
             elif(character in ".|"):
                 new_node = Node(character)
-                new_node.right_child(node_stack.pop())
-                new_node.left_child(node_stack.pop())
+                new_node.right_child = node_stack.pop()
+                new_node.left_child = node_stack.pop()
                 node_stack.append(new_node)
                 self.node_list.append(new_node)
             # Si es un simbolo solo se guarda en el stack

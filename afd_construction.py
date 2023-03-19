@@ -46,4 +46,14 @@ def lastpos(node):
         return {node.position}
     
 def followpos(node):
-    pass
+    
+    if(node.character == "."):
+        pos_i = lastpos(node.left_child)
+        for i in pos_i:
+            i.followpos.add(firstpos(node.right_child))
+    elif(node.character in "*+"):
+        pos_i = lastpos(node.left_child)
+        for i in pos_i:
+            i.followpos.add(firstpos(node.left_child))
+    else:
+        return set()
