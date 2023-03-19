@@ -38,7 +38,7 @@ class AFN(object):
             return self.positive()
         elif(character == '?'):
             return self.nullable()
-        elif(len(self.characters_stack) == 0):
+        else:
             return self.singleState(character)
 
     def singleState(self, symbol):

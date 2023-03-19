@@ -90,31 +90,63 @@ def computeProperties(nodes):
         node.lastpos = lastpos(node)
         followpos(node)
 
-def afd_construction(regex):
-    tree = SyntaxTree(regex)
+def getSymbols(regex):
 
+    symbols = []
+
+    for i in regex:
+        if(i not in symbols and i not in ".|*+?()"):
+            symbols.append(i)
+
+    return symbols
+
+
+# Se utiliza el algoritmo para la construccion directa
+def afd_construction(regex):
+    # Se crea el arbol
+    tree = SyntaxTree(regex)
+    # Se obtiene la raiz y la lista de nodos
     tree_root = tree.tree_root
     node_list = tree.node_list
-
+    # Se crean los estados y transiciones del AFD
     states = ["S0"]
     transitions = []
     final_states = []
-    symbols = []
+    symbols = getSymbols(regex)
 
+    # Se ejecutan las propiedades de los nodos
     computeProperties(node_list)
-
+    
+    # Se crea dstates
     Dstates = [firstpos(tree_root)]
     state_counter = 0
     # Mientras no haya ninguno marcado se continua
     while(state_counter != len(Dstates)):
         # Se itera por cada simbolo
         for symbol in symbols:
-            pass
+            # Se crea el nuevo set
+            new_state = set()
+            # Por cada nodo de dstates
+            for node in Dstates[state_counter]:
+                # Une cada followpos
+                if(node.character == symbol):
+                    new_state = new_state.union(node.followpos)
+            # Si el nuevo estado es vacio no se toma en cuenta
+            if(len(new_state) != 0):
+                # Si el estado no esta en Dstates se ingresa
+                if(new_state not in Dstates):
+                    Dstates.append(new_state)
+                    states.append("S" + str(len(states)))
+                # Se busca el estado de transicion
+                new_state_counter = Dstates.index(new_state)
+                # Se realiza la transicion
+                transitions.append([states[state_counter], symbol, states[new_state_counter]])
+        # Se agrega un contador para marcar los estados
         state_counter += 1
-
 
     # Se crea el AFD
     afd = AFD()
+    afd.regex = regex
     afd.states = states
     afd.transitions = transitions
     afd.initial_state = states[0]

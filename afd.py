@@ -4,6 +4,7 @@ from graphviz import Digraph
 class AFD(object):
 
     def __init__(self):
+        self.regex = None
         self.states_counter = 0
         self.states = []
         self.transitions = []
