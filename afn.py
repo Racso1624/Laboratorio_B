@@ -44,7 +44,7 @@ class AFN(object):
     def singleState(self, symbol):
         
         # Se ingresa el simbolo a la lista de simbolos
-        if(symbol not in self.symbols):
+        if(symbol not in self.symbols and symbol != "ε"):
             self.symbols.append(symbol)
 
         # Se crea un nuevo estado inicial
