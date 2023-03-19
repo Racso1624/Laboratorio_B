@@ -5,11 +5,11 @@ from afn import *
 from afd_construction import *
 
 #text = "(a(a?b*|c+)b|baa)"
-text = "(a|b)*abb"
+#text = "(a|b)*abb"
 #text = "a?"
-#text = "ba|b(a*)"
+text = "(a*)+"
 
-afd_construction(text)
+afdConstruction(text)
 
 afn = AFN(text)
 print(afn.transitions)

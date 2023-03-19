@@ -25,7 +25,7 @@ class AFD(object):
 
             if(state in self.initial_state):
                 graph.node(str(state), str(state), shape="circle", style="filled")
-            elif(state in self.final_state):
+            if(state in self.final_state):
                 graph.node(str(state), str(state), shape="doublecircle", style="filled")
             else:
                 graph.node(str(state), str(state), shape="circle")

@@ -102,7 +102,7 @@ def getSymbols(regex):
 
 
 # Se utiliza el algoritmo para la construccion directa
-def afd_construction(regex):
+def afdConstruction(regex):
     # Se crea el arbol
     tree = SyntaxTree(regex)
     # Se obtiene la raiz y la lista de nodos
@@ -141,8 +141,22 @@ def afd_construction(regex):
                 new_state_counter = Dstates.index(new_state)
                 # Se realiza la transicion
                 transitions.append([states[state_counter], symbol, states[new_state_counter]])
+
         # Se agrega un contador para marcar los estados
         state_counter += 1
+
+    for i in Dstates:
+        # Se hacen dos sets para lograr hacer operaciones de conjuntos entre ellos
+        set_states = set(i)
+        set_final_states = set(lastpos(tree_root))
+
+        # Se verifica que los estados encontrados se encuentren en el conjunto de estados finales
+        if(set_states.intersection(set_final_states).__len__() != 0):
+            index = Dstates.index(i)
+            final_states.append(states[index])
+            print(states[index])
+
+        
 
     # Se crea el AFD
     afd = AFD()
