@@ -10,7 +10,7 @@ class AFD(object):
         self.initial_state = []
         self.final_state = []
         self.symbols = []
-    
+
     # Funcion para graficar el automata
     def graphAF(self):
         
