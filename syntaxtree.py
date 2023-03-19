@@ -1,7 +1,7 @@
 from regex import *
 
 # Clase Syntax Tree
-class SyntaxTree():
+class SyntaxTree(object):
 
     # Se inicia con la expresion regular
     def __init__(self, regex):
@@ -43,9 +43,24 @@ class SyntaxTree():
         # Cuando se termina el for la raiz queda en el stack
         self.tree_root = node_stack.pop()
 
+    # Funcion para imprimir caracteres y sus nodos hijos
+    def printTree(self):
+        # Para cada nodo en la lista de los nodos
+        for node in self.node_list:\
+            # Se imprime el caracter
+            print("Caracter")
+            print(node.character)
+            # Si tiene hijos izquierdos y derechos se imprimen
+            if(node.left_child):
+                print("Izquierdo")
+                print(node.left_child.character)
+            if(node.right_child):
+                print("Derecho")
+                print(node.right_child.character)
+
 
 # Se crea la clase nodo
-class Node:
+class Node(object):
     
     # Se inicia con el caracter y la posicion de manera nula
     def __init__(self, character, position = None):

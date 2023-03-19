@@ -2,13 +2,13 @@
 # Carné 20679
 
 from afn import *
-from syntaxtree import *
+from afd_construction import *
 
 #text = "(a(a?b*|c+)b|baa)"
 text = "(a|b)*abb"
 #text = "a?"
 
-tree = SyntaxTree(text)
+afd_construction(text)
 
 afn = AFN(text)
 print(afn.transitions)
