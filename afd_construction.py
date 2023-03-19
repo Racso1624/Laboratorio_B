@@ -65,22 +65,21 @@ def lastpos(node):
 
 # Se utiliza el algoritmo para el followpos
 def followpos(node):
-    
     # Para cada caracter de concatenacion se realiza el algoritmo
     if(node.character == "."):
         # Se toma el lastpos y se itera
         pos_i = lastpos(node.left_child)
         # Para cada 
         for i in pos_i:
-            i.followpos.add(firstpos(node.right_child))
+            i.followpos = i.followpos.union(firstpos(node.right_child))
     elif(node.character in "*+"):
         pos_i = lastpos(node.left_child)
         for i in pos_i:
-            i.followpos.add(firstpos(node.left_child))
-    else:
-        return set()
+            i.followpos = i.followpos.union(firstpos(node.left_child))
     
 def afd_construction(regex):
     tree = SyntaxTree(regex)
     for i in tree.node_list:
-        print(firstpos(i))
+        followpos(i)
+    for i in tree.node_list:
+        print(i.followpos)
