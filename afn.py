@@ -360,19 +360,16 @@ class AFN(object):
                     new_state_counter = Dstates.index(new_state)
                     # Se realiza la transicion
                     transitions.append([states[state_counter], symbol, states[new_state_counter]])
-            
-            state_counter += 1
 
-        for i in Dstates:
             # Se hacen dos sets para lograr hacer operaciones de conjuntos entre ellos
-            set_states = set(i)
+            set_states = set(Dstates[state_counter])
             set_final_states = set(self.final_state)
 
             # Se verifica que los estados encontrados se encuentren en el conjunto de estados finales
             if(set_states.intersection(set_final_states).__len__() != 0):
-                index = Dstates.index(i)
-                final_states.append(states[index])
-                print(states[index])
+                final_states.append(states[state_counter])
+            
+            state_counter += 1
 
         # Se crea el AFD
         afd = AFD()
