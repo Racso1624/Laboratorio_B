@@ -4,10 +4,6 @@ from graphviz import Digraph
 class AFD(object):
 
     def __init__(self):
-        # self.regex = None
-        # self.postfix_expression = Regex(self.regex).postfix_expression
-        # print(self.postfix_expression)
-        # self.characters_stack = list(self.postfix_expression)
         self.states_counter = 0
         self.states = []
         self.transitions = []

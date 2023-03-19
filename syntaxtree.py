@@ -4,26 +4,43 @@ class SyntaxTree():
 
     def __init__(self, regex):
         self.regex = regex
-        self.replaceNullable()
         self.postfix =  Regex(self.regex).postfix_expression + "#."
+        self.node_list = []
+        self.tree_root = None
 
-    
-    def replaceNullable(self):
+    def buildTree(self):
         
-        expression = self.regex
+        node_stack = []
+        position_counter = 1
 
-        while(expression.count('?') != 0):
-            index = expression.index('?')
-            character = expression[index - 1]
-            string = character + "?"
-            new_string = f"({character}|ε)"
-            expression =  expression.replace(string, new_string)
+        for character in self.postfix:
+            
+            if(character in "+*?"):
+                new_node = Node(character)
+                new_node.left_child(node_stack.pop())
+                node_stack.append(new_node)
+                self.node_list.append(new_node)
+            elif(character in ".|"):
+                new_node = Node(character)
+                new_node.right_child(node_stack.pop())
+                new_node.left_child(node_stack.pop())
+                node_stack.append(new_node)
+                self.node_list.append(new_node)
+            else:
+                new_node = Node(character, position_counter)
+                node_stack.append(new_node)
+                self.node_list.append(new_node)
+        
+        self.tree_root = node_stack.pop()
 
-        self.regex = expression
 
 class Node:
     
-    def __init__(self, character, firstpos, lastpos):
+    def __init__(self, character, position = None):
         self.character = character
-        self.firstpos = firstpos
-        self.lastpos = lastpos
+        self.firstpos = set()
+        self.lastpos = set()
+        self.followpos = set()
+        self.position = position
+        self.left_child = None
+        self.right_child = None

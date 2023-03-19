@@ -4,9 +4,9 @@
 from afn import *
 from syntaxtree import *
 
-text = "(a(a?b*|c+)b|baa)"
+#text = "(a(a?b*|c+)b|baa)"
 #text = "(a|b)*abb"
-#text = "a?"
+text = "a?"
 
 tree = SyntaxTree(text)
 
