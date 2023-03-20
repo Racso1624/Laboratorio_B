@@ -1,5 +1,6 @@
+from afd import *
 
-def afdMinimization(afd):
+def afdMinimization(afd, name):
     states = afd.states
     transitions = afd.transitions
     symbols = afd.symbols
@@ -30,10 +31,10 @@ def afdMinimization(afd):
                             for partition_2 in partitions:
                                 if(transition[2] in partition_2):
                                     if(state not in partition_dictionary):
-                                        partition_dictionary[state] = [partitions.index(partition_2)]
+                                        partition_dictionary[state] = [[symbol, partitions.index(partition_2)]]
                                     else:
                                         value = partition_dictionary[state]
-                                        value.append(partitions.index(partition_2))
+                                        value.append([symbol, partitions.index(partition_2)])
                                         partition_dictionary[state] = value
 
         states_partition = []
@@ -56,4 +57,32 @@ def afdMinimization(afd):
         else:
             partitions = new_partitions
 
+    print(states_partition)
+    minimized_states = []
+    minimized_transitions = []
+    minimized_final_state = []
+
+    for partition in partitions:
+        minimized_states.append("S" + str(partitions.index(partition)))
+
+    for partition in partitions:
+        for symbol in symbols:
+            index = partitions.index(partition)
+            state_partition = states_partition[index]
+            len_partition = len(state_partition) - 1
+            for i in range(len_partition):
+                if(state_partition[i][0] == symbol):
+                    minimized_transitions.append([minimized_states[index], symbol, minimized_states[state_partition[i][1]]])
     
+
+
+    print(minimized_transitions)
+    # Se crea el AFD
+    afd_minimized = AFD(name)
+    afd_minimized.regex = afd.regex
+    afd_minimized.states = minimized_states
+    afd_minimized.transitions = minimized_transitions
+    afd_minimized.initial_state = minimized_states[0]
+    afd_minimized.final_state = minimized_final_state
+    afd_minimized.symbols = afd.symbols
+    afd_minimized.graphAF()

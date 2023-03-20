@@ -17,7 +17,6 @@ class AFN(object):
         self.symbols = []
         self.thompsonConstruction()
         self.orderTransitions()
-        self.graphAF()
 
     def thompsonConstruction(self):
         
@@ -370,7 +369,7 @@ class AFN(object):
             state_counter += 1
 
         # Se crea el AFD
-        afd = AFD()
+        afd = AFD("AFD de AFN")
         afd.regex = self.regex
         afd.states = states
         afd.transitions = transitions

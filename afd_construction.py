@@ -156,7 +156,7 @@ def afdConstruction(regex):
         
 
     # Se crea el AFD
-    afd = AFD()
+    afd = AFD("AFD Directo")
     afd.regex = regex
     afd.states = states
     afd.transitions = transitions

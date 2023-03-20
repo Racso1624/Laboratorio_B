@@ -3,7 +3,7 @@ from graphviz import Digraph
 
 class AFD(object):
 
-    def __init__(self):
+    def __init__(self, name):
         self.regex = None
         self.states_counter = 0
         self.states = []
@@ -11,6 +11,7 @@ class AFD(object):
         self.initial_state = []
         self.final_state = []
         self.symbols = []
+        self.afd_name = name
 
     # Funcion para graficar el automata
     def graphAF(self):
@@ -35,4 +36,4 @@ class AFD(object):
             graph.edge(str(transition[0]), str(transition[2]), label=transition[1])
 
         # Se renderiza
-        graph.render("./images/AFD", format="png", view=True)
+        graph.render(f"./images/{self.afd_name}", format="png", view=True)
