@@ -1,8 +1,0 @@
-digraph {
-	label="AFD de la Expresión ba|b(a*)" labelloc=t rankdir=LR
-	S0 [label=S0 shape=circle style=filled]
-	S0 [label=S0 shape=circle]
-	S1 [label=S1 shape=circle]
-	S0 -> S1 [label=b]
-	S1 -> S1 [label=a]
-}

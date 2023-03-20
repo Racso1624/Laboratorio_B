@@ -6,13 +6,15 @@ from afd_construction import *
 from afd_minimization import *
 
 #text = "(a(a?b*|c+)b|baa)"
-text = "ba|b(a*)"
 #text = "0?(1|ε)?0*"
 #text = "(b|b)*abb(a|b)*"
 #text = "(a|b)*abb"
+text = "b*ab?"
 string = "aaa"
+title = "PreLab_1"
 
-afdConstruction(text)
-afn = AFN(text)
+afd = afdConstruction(text, title)
+afn = AFN(text, title)
 afn_to_afd = afn.subsetConstruction()
-afdMinimization(afn_to_afd, "Minimizado AFD de AFN")
+afdMinimization(afn_to_afd, "Minimizado AFD de AFN", title)
+afdMinimization(afd, "Minimizado AFD Directo", title)

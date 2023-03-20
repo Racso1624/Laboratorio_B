@@ -102,7 +102,7 @@ def getSymbols(regex):
 
 
 # Se utiliza el algoritmo para la construccion directa
-def afdConstruction(regex):
+def afdConstruction(regex, title):
     # Se crea el arbol
     tree = SyntaxTree(regex)
     # Se obtiene la raiz y la lista de nodos
@@ -156,10 +156,13 @@ def afdConstruction(regex):
         
 
     # Se crea el AFD
-    afd = AFD("AFD Directo")
+    afd = AFD("AFD Directo", title)
     afd.regex = regex
     afd.states = states
+    afd.symbols = symbols
     afd.transitions = transitions
     afd.initial_state = states[0]
     afd.final_state = final_states
     afd.graphAF()
+
+    return afd

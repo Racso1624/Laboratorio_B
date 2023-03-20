@@ -1,7 +1,7 @@
 from afd import *
 
 # Funcion para minimizacion
-def afdMinimization(afd, name):
+def afdMinimization(afd, name, title):
     # Se obtienen los estados
     states = afd.states
     transitions = afd.transitions
@@ -28,7 +28,7 @@ def afdMinimization(afd, name):
     while(not_distinguishable):
         # Se utiliza un diccionario para guardar particiones
         partition_dictionary = {}
-
+        print(partitions)
         # Se itera en cada particion y estado de esta
         for partition in partitions:
             for state in partition:
@@ -45,11 +45,15 @@ def afdMinimization(afd, name):
                                         value = partition_dictionary[state]
                                         value.append([symbol, partitions.index(partition_2)])
                                         partition_dictionary[state] = value
+                        else:
+                            if(state not in partition_dictionary):
+                                    partition_dictionary[state] = []
 
         # Se crean las particiones de los simbolos y a que grupo llega cada uno
         states_partition = []
         new_partitions = []
-        # para cada estado de las particiones se revisa el diccionario
+        print(partition_dictionary)
+        # Para cada estado de las particiones se revisa el diccionario
         for partition in partitions:
             for state in partition:
                 value_partition = partition_dictionary[state]
@@ -94,7 +98,7 @@ def afdMinimization(afd, name):
                     minimized_transitions.append([minimized_states[index], symbol, minimized_states[state_partition[i][1]]])
     
     # Se crea el AFD
-    afd_minimized = AFD(name)
+    afd_minimized = AFD(name, title)
     afd_minimized.regex = afd.regex
     afd_minimized.states = minimized_states
     afd_minimized.transitions = minimized_transitions

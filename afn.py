@@ -4,7 +4,7 @@ from afd import *
 
 class AFN(object):
 
-    def __init__(self, regex):
+    def __init__(self, regex, title):
         self.regex = regex
         self.postfix_expression = Regex(regex).postfix_expression
         print(self.postfix_expression)
@@ -15,6 +15,7 @@ class AFN(object):
         self.initial_state = []
         self.final_state = []
         self.symbols = []
+        self.title = title
         self.thompsonConstruction()
         self.orderTransitions()
 
@@ -369,7 +370,7 @@ class AFN(object):
             state_counter += 1
 
         # Se crea el AFD
-        afd = AFD("AFD de AFN")
+        afd = AFD("AFD de AFN", self.title)
         afd.regex = self.regex
         afd.states = states
         afd.transitions = transitions
@@ -468,4 +469,4 @@ class AFN(object):
             graph.edge(str(transition[0]), str(transition[2]), label=transition[1])
 
         # Se renderiza
-        graph.render("./images/AFN", format="png", view=True)
+        graph.render("./images/AFN" + self.title, format="png", view=True)
