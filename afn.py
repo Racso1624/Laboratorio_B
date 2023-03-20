@@ -18,8 +18,6 @@ class AFN(object):
         self.thompsonConstruction()
         self.orderTransitions()
         self.graphAF()
-        self.subsetConstruction()
-
 
     def thompsonConstruction(self):
         
@@ -379,6 +377,8 @@ class AFN(object):
         afd.initial_state = states[0]
         afd.final_state = final_states
         afd.graphAF()
+
+        return afd
         
     
     # Se utiliza el algoritmo del libro para calcular e-closure
