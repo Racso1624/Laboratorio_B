@@ -376,6 +376,7 @@ class AFN(object):
         afd.transitions = transitions
         afd.initial_state = states[0]
         afd.final_state = final_states
+        afd.symbols = self.symbols
         afd.graphAF()
 
         return afd

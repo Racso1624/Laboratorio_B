@@ -2,6 +2,7 @@
 def afdMinimization(afd):
     states = afd.states
     transitions = afd.transitions
+    symbols = afd.symbols
     partitions = []
     acceptance_state = []
     normal_state = []
@@ -19,5 +20,10 @@ def afdMinimization(afd):
 
     not_distinguishable = True
     while(not_distinguishable):
-        for i in partitions:
-            pass
+        for partition in partitions:
+            for state in partition:
+                for symbol in symbols:
+                    for transition in transitions:
+                        if(transition[0] == state and transition[1] == symbol):
+                            print(transition)
+        not_distinguishable = False
