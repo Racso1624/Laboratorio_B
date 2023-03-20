@@ -325,9 +325,9 @@ class AFN(object):
 
         # Se verifica que los estados encontrados se encuentren en el conjunto de estados finales
         if(set_states.intersection(set_final_states).__len__() != 0):
-            return "Cadena Aceptada"
+            print("Cadena Aceptada")
         else:
-            return "Cadena No Aceptada"
+            print("Cadena No Aceptada")
     
     # Se realiza SubSet Construction con el Algoritmo brindado
     def subsetConstruction(self):

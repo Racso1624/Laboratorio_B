@@ -34,9 +34,9 @@ class AFD(object):
 
         # Se verifica que los estados encontrados se encuentren en el conjunto de estados finales
         if(set_states.intersection(set_final_states).__len__() != 0):
-            return "Cadena Aceptada"
+            print("Cadena Aceptada")
         else:
-            return "Cadena No Aceptada"
+            print("Cadena No Aceptada") 
     
     # Se utiliza el algoritmo de e-closure para calcular move
     def move(self, states, character):
