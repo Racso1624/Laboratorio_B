@@ -20,17 +20,40 @@ def afdMinimization(afd):
 
     not_distinguishable = True
     while(not_distinguishable):
-        partitions_table = []
+        partition_dictionary = {}
+
         for partition in partitions:
-            for state in states:
+            for state in partition:
                 for symbol in symbols:
                     for transition in transitions:
                         if(transition[0] == state and transition[1] == symbol):
                             for partition_2 in partitions:
                                 if(transition[2] in partition_2):
-                                    partitions_table.append([state, symbol, partitions.index(partition_2), partitions.index(partition)])
+                                    if(state not in partition_dictionary):
+                                        partition_dictionary[state] = [partitions.index(partition_2)]
+                                    else:
+                                        value = partition_dictionary[state]
+                                        value.append(partitions.index(partition_2))
+                                        partition_dictionary[state] = value
 
-        new_partition = []
+        states_partition = []
+        new_partitions = []
         for partition in partitions:
-            pass                        
-        not_distinguishable = False
+            for state in partition:
+                value_partition = partition_dictionary[state]
+                value_partition.append(partitions.index(partition))
+
+                if(value_partition not in states_partition):
+                    states_partition.append(value_partition)
+                    new_partitions.append([state])
+                else:
+                    if(value_partition in states_partition):
+                        index = states_partition.index(value_partition)
+                        new_partitions[index].append(state)       
+
+        if(partitions == new_partitions):
+            not_distinguishable = False
+        else:
+            partitions = new_partitions
+
+    
