@@ -28,7 +28,6 @@ def afdMinimization(afd, name, title):
     while(not_distinguishable):
         # Se utiliza un diccionario para guardar particiones
         partition_dictionary = {}
-        print(partitions)
         # Se itera en cada particion y estado de esta
         for partition in partitions:
             for state in partition:
@@ -52,7 +51,6 @@ def afdMinimization(afd, name, title):
         # Se crean las particiones de los simbolos y a que grupo llega cada uno
         states_partition = []
         new_partitions = []
-        print(partition_dictionary)
         # Para cada estado de las particiones se revisa el diccionario
         for partition in partitions:
             for state in partition:
@@ -83,6 +81,14 @@ def afdMinimization(afd, name, title):
     # Por cada particion se crea un nuevo estado
     for partition in partitions:
         minimized_states.append("S" + str(partitions.index(partition)))
+
+        # Se hacen dos sets para lograr hacer operaciones de conjuntos entre ellos
+        set_states = set(partition)
+        set_final_states = set(afd.final_state)
+
+        # Se verifica que los estados encontrados se encuentren en el conjunto de estados finales
+        if(set_states.intersection(set_final_states).__len__() != 0):
+            minimized_final_state.append("S" + str(partitions.index(partition)))
 
     # Se crean las tranciones por cada una de las particiones
     for partition in partitions:

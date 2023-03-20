@@ -9,9 +9,8 @@ from afd_minimization import *
 #text = "0?(1|ε)?0*"
 #text = "(b|b)*abb(a|b)*"
 #text = "(a|b)*abb"
-text = "b*ab?"
-string = "aaa"
-title = "PreLab_1"
+text = "(a|b)*a(a|b)(a|b)"
+title = "PreLab_6"
 
 afd = afdConstruction(text, title)
 afn = AFN(text, title)

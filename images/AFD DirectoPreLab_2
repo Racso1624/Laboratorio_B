@@ -1,0 +1,12 @@
+digraph {
+	label="AFD de la Expresión 0?(1?)?0*" labelloc=t rankdir=LR
+	S0 [label=S0 shape=circle style=filled]
+	S0 [label=S0 shape=doublecircle style=filled]
+	S1 [label=S1 shape=doublecircle style=filled]
+	S2 [label=S2 shape=doublecircle style=filled]
+	S0 -> S1 [label=0]
+	S0 -> S2 [label=1]
+	S1 -> S2 [label=0]
+	S1 -> S2 [label=1]
+	S2 -> S2 [label=0]
+}
