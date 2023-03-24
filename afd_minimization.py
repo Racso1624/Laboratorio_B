@@ -1,3 +1,6 @@
+# Oscar Fernando López Barrios
+# Carné 20679
+
 from afd import *
 
 # Funcion para minimizacion

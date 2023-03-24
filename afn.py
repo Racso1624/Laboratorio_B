@@ -1,3 +1,6 @@
+# Oscar Fernando López Barrios
+# Carné 20679
+
 from regex import *
 from graphviz import Digraph
 from afd import *

@@ -1,3 +1,6 @@
+# Oscar Fernando López Barrios
+# Carné 20679
+
 from regex import *
 from graphviz import Digraph
 
@@ -17,7 +20,7 @@ class AFD(object):
     # Se realiza la simulacion con el algoritmo del libro
     def simulation(self, string):
         # Se inicializan los estados con e_closure del inicial
-        states = self.initial_state
+        states = [self.initial_state]
         # Se inicia el conteo de caracteres de la cadena
         character_count = 0
 
@@ -41,10 +44,9 @@ class AFD(object):
     # Se utiliza el algoritmo de e-closure para calcular move
     def move(self, states, character):
         # Se inicia el stack con los estados de T
-        states_stack = list(states)
+        states_stack = states
         # Se inicia sin estados
         states_result = []
-
         # Se itera mientra el stack no se encuentre vacio
         while(len(states_stack) != 0):
             # Se saca el estado t
